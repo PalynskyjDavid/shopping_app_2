@@ -2,18 +2,20 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function AddMemberForm({ show, userList, handlerMap }) {
+export default function AddMemberForm({ show, userList, handlerMap, handleClose, listId }) {
 
   return (
-    <Modal show={show} onHide={() => {handlerMap.setShow(false)}}>
+    <Modal show={show} onHide={() => {handleClose()}}>
       <Form
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
           const formData = new FormData(e.target);
           const values = Object.fromEntries(formData);
-          handlerMap.addMember({ memberId: values.memberId });
-          handlerMap.setShow(false);
+          handlerMap.addMember({ listId, memberId: values.memberId });
+          //console.log("Adding member " +values.memberId+ " to list "+ listId)
+          //handlerMap.setShow(false);
+          //handleClose()
         }}
       >
         <Modal.Header closeButton>
@@ -32,7 +34,7 @@ function AddMemberForm({ show, userList, handlerMap }) {
           </Form.Select>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => handlerMap.setShow(false)}>
+          <Button variant="secondary" onClick={() => {handleClose()}}>
             Close
           </Button>
           <Button variant="primary" type="submit">
@@ -43,5 +45,3 @@ function AddMemberForm({ show, userList, handlerMap }) {
     </Modal>
   );
 }
-
-export default AddMemberForm;

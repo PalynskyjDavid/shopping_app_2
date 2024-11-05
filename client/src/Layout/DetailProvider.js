@@ -166,7 +166,7 @@ function DetailProvider({ children }) {
                     });
                 });
             },
-            addMember: (list_id, memberId) => {
+            addMember: ({list_id, memberId}) => {
                 setData((current) => {
                     return current.map((list) => {
                         if (list.id === list_id) {
@@ -179,7 +179,7 @@ function DetailProvider({ children }) {
                     });
                 });
             },
-            removeMember: (list_id, memberId) => {
+            removeMember: ({list_id, memberId}) => {
                 setData((current) => {
                     return current.map((list) => {
                         if (list.id === list_id) {
